@@ -1,25 +1,32 @@
 #!/usr/bin/make
 
-.PHONY: clean cleanall
+.PHONY: help clean cleanall
 .SUFFIXES: .ipynb .html .pdf .tex .md
 .DEFAULT: render
 
-render:	 anomaly-detection.html
+help: ## Show this help message
+	@echo Anomaly Detection
+	@echo ""
+	@echo Available targets:
+	@awk 'match($$0, /^([^[:space:]#].*):[[:space:]]*##[[:space:]]*(.*)$$/, m) {printf "  \033[1;36m%-30s\033[0m %s\n", m[1], m[2]}' $(MAKEFILE_LIST)
 
-%.tex: %.ipynb
-	@uv run jupyter nbconvert --execute --to latex --template article.tplx --output $@ $<
+render: ## Render anomaly-detection notebook to HTML
+	$(MAKE) anomaly-detection.html
 
-%.pdf: %.tex
+%.tex: %.ipynb ## Convert Jupyter notebook to LaTeX
+	@uv run jupyter nbconvert --execute --to latex --output $@ $<
+
+%.pdf: %.tex ## Compile LaTeX to PDF
 	@pdflatex $<
 
-%.html: %.ipynb
+%.html: %.ipynb ## Convert Jupyter notebook to HTML
 	@uv run jupyter nbconvert --execute --to html --output $@ $<
 
 %.html : %.md
 	@pandoc $< -o $@
 
-clean:
+clean: ## Remove intermediate build files
 	@$(RM) -rf *.aux *.out *.log *.bbl *.blg *.tex *_files/
 
-cleanall: clean
+cleanall: clean ## Remove all generated files (HTML, PDF)
 	@$(RM) -rf *.html *.pdf

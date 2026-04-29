@@ -1,13 +1,15 @@
 # Anomaly Detection
 
-Anomalies are patterns in data that do not conform to a well-defined notion
-of normal behavior.
+Anomalies are patterns in data that do not conform to a well-defined notion of
+normal behavior.
 
 Techniques used to detect anomalies typically require training before being
 applied to new data.
 
-This Jupyter Notebook reproduces the results from Oana Niculaescu's XRDS article:
-["Applying Data Science for Anomaly and Change Point Detection"](http://xrds.acm.org/article.cfm?aid=3265925).
+This Jupyter notebook reproduces the results from Oana Niculaescu's XRDS
+article: [Applying Data Science for Anomaly and Change Point
+Detection](http://xrds.acm.org/article.cfm?aid=3265925) (a local copy is
+[here](/home/frank/documents/articles/anomaly-detection/anomaly-detection.ipynb)).
 
 ## Features
 
@@ -47,7 +49,7 @@ source .venv/bin/activate  # On Linux/macOS
 
 ### Running the Notebook
 
-Start Jupyter Notebook:
+Start Jupyter notebook:
 
 ```bash
 uv run jupyter notebook
